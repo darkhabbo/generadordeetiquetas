@@ -1,0 +1,200 @@
+<!--/*SC*/DOCTYPE html/*EC*/-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta defang_name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Etiquetas</title>
+    <style><!--
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #labelContainer {
+            margin-top: 20px;
+        }
+
+        .label {
+            font-size: 24px;
+            font-family: 'Frutiger', Arial, sans-serif;
+            border: 2px dashed #000; 
+            padding: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .label span {
+            margin-right: 10px;
+        }
+
+        .arrow {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle; 
+        }
+    --></style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Etiquetas</h1>
+        <form id="labelForm">
+            <label for="code">Código del Artículo:</label>
+            <input type="text" id="code" defang_required>
+
+            <label for="description">Descripción del Artículo:</label>
+            <input type="text" id="description" defang_required>
+
+            <label for="unit">Unidad de Medida:</label>
+            <input type="text" id="unit" defang_required>
+
+            <button type="submit">Agregar Etiqueta</button>
+        </form>
+        <div id="labelContainer"></div>
+        <button id="downloadPDF" style="display:none;">Descargar PDF</button>
+    </div>
+
+    <!--/*SC*/ jsPDF library /*EC*/-->
+    <!--defang_script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"--><!--  --><!--/defang_script-->
+
+    <!--defang_script-->
+        <!-- const labels = [];
+
+        document.getElementById('labelForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            addLabel();
+        });
+
+        function addLabel() {
+            const code = document.getElementById('code').value;
+            const description = document.getElementById('description').value;
+            const unit = document.getElementById('unit').value;
+
+            const label = {
+                code: code,
+                description: description,
+                unit: unit
+            };
+
+            labels.push(label);
+            renderLabels();
+            document.getElementById('labelForm').reset();
+        }
+
+        function renderLabels() {
+            const labelContainer = document.getElementById('labelContainer');
+            labelContainer.innerHTML = ''; // Limpiar las etiquetas anteriores
+            labels.forEach((label) => {
+                const labelDiv = document.createElement('div');
+                labelDiv.className = 'label';
+                labelDiv.innerHTML = `
+                    <span>${label.code}</span>
+                    <span>${label.description}</span>
+                    <span>${label.unit}</span>
+                    <img src="https://cdn-icons-png.flaticon.com/512/626/626013.png" alt="Arrow" class="arrow">
+                `;
+                labelContainer.appendChild(labelDiv);
+            });
+            if (labels.length > 0) {
+                document.getElementById('downloadPDF').style.display = 'block';
+            }
+        }
+
+        document.getElementById('downloadPDF').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+                orientation: 'landscape'
+            });
+
+            let y = 20;
+            const margin = 3;
+
+            labels.forEach((label, index) => {
+                doc.setFontSize(36);
+
+                const labelText = `${label.code} - ${label.description} - ${label.unit}`;
+                const textWidth = doc.getTextWidth(labelText);
+                const textHeight = 36;
+
+                // Calcular el tamaño y posición del marco
+                const rectWidth = textWidth + margin * 2 + 30; // Margen adicional para la flecha
+                const rectHeight = textHeight + margin * 2;
+                const rectX = 20;
+                const rectY = y;
+
+                // Dibujar el marco
+                doc.rect(rectX, rectY, rectWidth, rectHeight);
+
+                // Centrar el texto dentro del marco
+                const textX = rectX + margin;
+                const textY = rectY + margin + textHeight / 2;
+
+                // Dibujar el texto
+                doc.text(labelText, textX, textY);
+
+                // Imagen de la flecha alineada con el texto
+                const arrowX = rectX + textWidth + 10;
+                const arrowY = textY - 12; // Alinear verticalmente
+                doc.addImage('https://cdn-icons-png.flaticon.com/512/626/626013.png', 'PNG', arrowX, arrowY, 24, 24);
+
+                // Ajustar la posición para la siguiente etiqueta
+                y += rectHeight + 20; // Mueve hacia abajo para la siguiente etiqueta
+
+                // Agregar una nueva página si es necesario
+                if (y + rectHeight > doc.internal.pageSize.getHeight()) {
+                    doc.addPage();
+                    y = 20; // Reiniciar la posición en la nueva página
+                }
+            });
+
+            doc.save('etiquetas.pdf');
+        }); -->
+    <!--/defang_script-->
+</body>
+</html>
+
