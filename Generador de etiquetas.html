@@ -115,20 +115,26 @@
             const description = document.getElementById('description').value;
             const unit = document.getElementById('unit').value;
 
-            const label = {
-                code: code,
-                description: description,
-                unit: unit
-            };
+            // Asegurarse de que todos los campos tengan valores
+            if (code && description && unit) {
+                const label = {
+                    code: code,
+                    description: description,
+                    unit: unit
+                };
 
-            labels.push(label);
-            renderLabels();
-            document.getElementById('labelForm').reset();
+                labels.push(label);
+                renderLabels();
+                document.getElementById('labelForm').reset();  // Limpiar el formulario después de agregar la etiqueta
+            } else {
+                alert('Por favor, complete todos los campos.');
+            }
         }
 
         function renderLabels() {
             const labelContainer = document.getElementById('labelContainer');
             labelContainer.innerHTML = ''; // Limpiar las etiquetas anteriores
+
             labels.forEach((label) => {
                 const labelDiv = document.createElement('div');
                 labelDiv.className = 'label';
@@ -140,6 +146,7 @@
                 `;
                 labelContainer.appendChild(labelDiv);
             });
+
             if (labels.length > 0) {
                 document.getElementById('downloadPDF').style.display = 'block';
             }
@@ -154,7 +161,7 @@
             let y = 20;
             const margin = 3;
 
-            labels.forEach((label, index) => {
+            labels.forEach((label) => {
                 doc.setFontSize(36);
 
                 const labelText = `${label.code} - ${label.description} - ${label.unit}`;
@@ -197,5 +204,3 @@
     </script>
 </body>
 </html>
-
-
