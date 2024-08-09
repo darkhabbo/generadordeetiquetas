@@ -1,10 +1,10 @@
-<!--/*SC*/DOCTYPE html/*EC*/-->
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta defang_name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Etiquetas</title>
-    <style><!--
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -78,20 +78,20 @@
             height: 24px;
             vertical-align: middle; 
         }
-    --></style>
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Generador de Etiquetas</h1>
         <form id="labelForm">
             <label for="code">Código del Artículo:</label>
-            <input type="text" id="code" defang_required>
+            <input type="text" id="code" required>
 
             <label for="description">Descripción del Artículo:</label>
-            <input type="text" id="description" defang_required>
+            <input type="text" id="description" required>
 
             <label for="unit">Unidad de Medida:</label>
-            <input type="text" id="unit" defang_required>
+            <input type="text" id="unit" required>
 
             <button type="submit">Agregar Etiqueta</button>
         </form>
@@ -99,11 +99,11 @@
         <button id="downloadPDF" style="display:none;">Descargar PDF</button>
     </div>
 
-    <!--/*SC*/ jsPDF library /*EC*/-->
-    <!--defang_script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"--><!--  --><!--/defang_script-->
+    <!-- Cargar la librería jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
-    <!--defang_script-->
-        <!-- const labels = [];
+    <script>
+        const labels = [];
 
         document.getElementById('labelForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -193,8 +193,9 @@
             });
 
             doc.save('etiquetas.pdf');
-        }); -->
-    <!--/defang_script-->
+        });
+    </script>
 </body>
 </html>
+
 
